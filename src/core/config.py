@@ -15,8 +15,8 @@ class Settings(Base):
 
     AUTH_VALIDATION_URL: str = os.getenv('AUTH_URL', 'http://auth:83') + "/validate"
 
-    MONGO_USER = os.getenv("MONGO_USER", "admin")
-    MONGO_PASSWORD = os.getenv("MONGO_PASSWORD", "admin")
+    MONGO_USER = os.getenv("MONGO_USER", "team2")
+    MONGO_PASSWORD = os.getenv("MONGO_PASSWORD", "team2")
     MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "movies")
     MONGO_HOSTS = os.getenv("MONGO_HOSTS", "localhost")
     MONGO_CONNECT_URI_TEMPLATE = os.getenv('MONGO_CONNECT_URI_TEMPLATE',

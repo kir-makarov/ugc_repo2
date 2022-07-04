@@ -11,9 +11,11 @@ services:
       - ./src/.env
     volumes:
       - ./mongo:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     ports:
       - "27017:27017"
     restart: always
+    command: mongod --auth
     networks:
       - backend
 
@@ -32,15 +34,16 @@ services:
     networks:
       - backend
 
-  traefik:
-    image: traefik:v2.2
-    container_name: traefik
-    ports:
-      - "80:80"
-      - "8080:8080"
+  nginx:
+    image: nginx:latest
+    container_name: "nginx_ugc"
     volumes:
-      - "./ugc/traefik/traefik.dev.toml:/etc/traefik/traefik.toml"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/api.conf:/etc/nginx/conf.d/api.conf
+    depends_on:
+      - ugc2
+    ports:
+      - "81:81"
     networks:
       - backend
 
