@@ -2,6 +2,7 @@ import motor.motor_asyncio
 from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel
 
+from api.v1.ugc import ugc_route
 from core.config import settings
 
 app = FastAPI(
@@ -9,6 +10,7 @@ app = FastAPI(
     docs_url='/ugc/docs',
     openapi_url='/ugc/openapi.json',
 )
+app.include_router(ugc_route, prefix="api/v1/")
 
 
 @app.on_event("startup")
