@@ -1,0 +1,50 @@
+version: '3.10'
+
+services:
+  mongodb:
+    container_name: "mongodb"
+    image: mongo
+    environment:
+      - PUID=1000
+      - PGID=1000
+    env_file:
+      - ./src/.env
+    volumes:
+      - ./mongo:/data/db
+    ports:
+      - "27017:27017"
+    restart: always
+    networks:
+      - backend
+
+  ugc2:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    container_name: ugc2
+    env_file:
+      - ./src/.env
+    depends_on:
+      - mongodb
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ugc.rule=Host(`localhost`)"
+    networks:
+      - backend
+
+  traefik:
+    image: traefik:v2.2
+    container_name: traefik
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "./ugc/traefik/traefik.dev.toml:/etc/traefik/traefik.toml"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - backend
+
+
+networks:
+  backend:
+    driver: bridge
