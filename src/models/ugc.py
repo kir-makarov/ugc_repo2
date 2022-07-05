@@ -10,6 +10,7 @@ class DefaultUserModel(BaseModel):
 
 class UserLike(DefaultUserModel):
     object_id: str
+    score: int
 
 
 class UserBookmark(DefaultUserModel):
