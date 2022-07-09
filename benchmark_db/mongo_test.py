@@ -3,9 +3,9 @@ import time
 from pymongo import MongoClient
 from pymongo.database import Database
 
-mongo_url: str = "mongodb://localhost:27017"
+mongo_url = "mongodb://localhost:27017"
 client = MongoClient(mongo_url)
-test_db = client.test_db
+test_db: Database = client.test_db
 
 
 def saving_data():
@@ -24,6 +24,5 @@ def find_data():
 
 
 if __name__ == '__main__':
-    print(saving_data_test())
-    print(get_data_test())
-    print(find_data_test())
+    print(saving_data())
+    print(find_data())
