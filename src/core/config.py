@@ -10,10 +10,14 @@ class Base(BaseSettings):
 
 
 class Settings(Base):
-    PROJECT_NAME: str = os.getenv('PROJECT_NAME', 'UGC')
+    PROJECT_NAME: str = os.getenv("PROJECT_NAME", "UGC")
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    AUTH_VALIDATION_URL: str = os.getenv('AUTH_URL', 'http://auth:83') + "/validate"
+    AUTH_VALIDATION_URL: str = os.getenv("AUTH_URL", "http://auth:83") + "/validate"
+
+    LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
+    LOGSTASH_HOST = "logstash"
+    LOGSTASH_PORT = 5044
 
     MONGO_USER = os.getenv("MONGO_USER", "team2")
     MONGO_PASSWORD = os.getenv("MONGO_PASSWORD", "team2")
