@@ -34,10 +34,10 @@ jobs:
 
     - name: Lint with wemake-python-styleguide
       run: |
-        flake8 /src --exit-zero --format=html --htmldir=reports/wemake-python-styleguide/
+        flake8 ./src --exit-zero --format=html --htmldir=reports/wemake-python-styleguide/
     - name: Lint with mypy
       run: |
-        mypy --html-report reports/mypy/ /src/* || true
+        mypy --html-report reports/mypy/ ./src/* || true
     - name: TG Report
       uses: "appleboy/telegram-action@master"
       with:
