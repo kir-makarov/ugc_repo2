@@ -1,10 +1,21 @@
 """
 Models of User Generated Content
 """
+import orjson
 from pydantic import BaseModel
 
 
-class DefaultUserModel(BaseModel):
+def orjson_dumps(v, *, default):
+    return orjson.dumps(v, default=default).decode()
+
+
+class BaseOrjsonModel(BaseModel):
+    class Config:
+        json_loads = orjson.loads
+        json_dumps = orjson_dumps
+
+
+class DefaultUserModel(BaseOrjsonModel):
     user_id: str
 
 

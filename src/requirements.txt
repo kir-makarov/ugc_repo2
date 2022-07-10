@@ -6,3 +6,4 @@ aiohttp==3.8.1
 python-dotenv==0.20.0
 uvicorn==0.18.2
 python-logstash-async==2.5.0
+orjson==3.7.7
